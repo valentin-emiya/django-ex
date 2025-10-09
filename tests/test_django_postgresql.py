@@ -1,4 +1,5 @@
 import pytest
+import os
 from pathlib import Path
 
 from container_ci_suite.openshift import OpenShiftAPI
@@ -29,8 +30,6 @@ class TestDjangoAppExTemplate:
         branch_to_test = "4.2.x"
         if VERSION == "3.9-ubi9":
             branch_to_test = "2.2.x"
-        elif VERSION == "3.6-ubi8":
-            branch_to_test = "master"
         expected_output = "Welcome to your Django application"
         template_json = self.oc_api.get_raw_url_for_json(
             container="django-ex", branch=branch_to_test, dir="openshift/templates", filename="django-postgresql-persistent.json"
